@@ -7,6 +7,7 @@ import ThankYou from './pages/ThankYou';
 import Login from './pages/Login';
 import Signup from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 import './styles/global.css';
 import { AuthContext } from './utils/AuthContext';
 import { collection, onSnapshot } from 'firebase/firestore';
@@ -99,7 +100,7 @@ function App() {
           <Route path='/survey-complete' element={<ThankYou />} />
           <Route path='/login' element={<Login />} />
           <Route path='/sign-up' element={<Signup />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         </Routes>
       </Router>
     </AuthContext.Provider>

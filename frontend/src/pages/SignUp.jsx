@@ -14,60 +14,57 @@ export default function Signup() {
     });
 
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
     const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
     const navigate = useNavigate();
 
-    // rather than doing this manually, we are creating a function that handles the input changes within our form
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserInfo((prev) => ({...prev, [name]:value}))
+        setUserInfo((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSignup = async (e) => {
         e.preventDefault();
 
-        // we are defining this here because we are submitting this to the backend for processing
-        const {email, firstName, lastName, password, confirmPassword} = userInfo;
+        const { email, firstName, lastName, password, confirmPassword } = userInfo;
 
-        if (password != confirmPassword) {
-            setError('Passwords do not match!');
+        if (!email.endsWith('@vanalen.org')) {
+            setError('Only @vanalen.org email addresses are allowed to register.');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match.');
             return;
         }
 
         if (!passwordPattern.test(password)) {
-            setError('Passwords must have a minimum of eight characters, one number and one special character.');
-            return;
-        }
-        if (!emailPattern.test(email)) {
-            setError('Invalid email, please make sure to use a proper email address!');
+            setError('Password must be at least 8 characters and include one number and one special character.');
             return;
         }
 
         try {
-            const res = await API.post('/register-user', {
-                email,
-                firstName,
-                lastName,
-                password,
-            });
-            console.log('Registered: ', res.data)
-            navigate('/login');
+            await API.post('/register-user', { email, firstName, lastName, password });
+            setError('');
+            setSuccess('Account created successfully! Redirecting to login...');
+            setTimeout(() => navigate('/login'), 2000);
         } catch (err) {
-            setError(err.response?.data?.message || 'Registration failed.');
-            console.error('Registration error:', err);
+            setError(err.response?.data?.error || 'Registration failed. Please try again.');
         }
-
-    }
+    };
 
     return (
         <>
-        <Logo/>
+        <Logo />
         <div className="auth-container">
             <h2>Sign Up</h2>
+            <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#555', marginBottom: '1rem' }}>
+                For Van Alen Institute staff only.<br />You must use your <strong>@vanalen.org</strong> email.
+            </p>
             <form onSubmit={handleSignup} className="auth-form">
                 <input
                     type="text"
@@ -88,7 +85,7 @@ export default function Signup() {
                 <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="Email (@vanalen.org)"
                     value={userInfo.email}
                     onChange={handleChange}
                     required
@@ -130,16 +127,14 @@ export default function Signup() {
                 </div>
 
                 {error && <div className="error-message">{error}</div>}
+                {success && <div className="success-message">{success}</div>}
                 <button type="submit" className="auth-button">Sign Up</button>
             </form>
             <p>
                 Already have an account? <a href="/login">Log in</a>
             </p>
-
         </div>
-        <footer className="login-signup-footer">Only Van Alen Instititute’s Staff Can Create An Account</footer>
+        <footer className="login-signup-footer">Only Van Alen Institute Staff Can Create An Account</footer>
         </>
-
     );
 }
-
