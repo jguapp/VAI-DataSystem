@@ -26,15 +26,16 @@ export default function Navbar() {
         i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en');
     };
 
-    const langLabel = i18n.language === 'en' ? 'ES' : 'EN';
-
     if (isAuthenticated) {
         return (
             <div className="navbar-container">
                 <Logo />
                 <div className="login-sign-up">
-                    <h2 className='dashboard' onClick={() => navigate('/dashboard')}>{t('nav.dashboard')}</h2>
-                    <h2 className='login' onClick={handleLogout}>{t('nav.logout')}</h2>
+                    <h2 className="lang-switch" onClick={toggleLanguage}>
+                        {i18n.language === 'en' ? 'ES' : 'EN'}
+                    </h2>
+                    <h2 className="dashboard" onClick={() => navigate('/dashboard')}>{t('nav.dashboard')}</h2>
+                    <h2 className="login" onClick={handleLogout}>{t('nav.logout')}</h2>
                 </div>
             </div>
         );
@@ -44,9 +45,11 @@ export default function Navbar() {
         <div className="navbar-container">
             <Logo />
             <div className="login-sign-up">
-                <button className="lang-toggle" onClick={toggleLanguage}>{langLabel}</button>
-                <h2 className='login' onClick={() => navigate('/login')}>{t('nav.login')}</h2>
-                <h2 className='sign-up' onClick={() => navigate('/sign-up')}>{t('nav.signup')}</h2>
+                <h2 className="lang-switch" onClick={toggleLanguage}>
+                    {i18n.language === 'en' ? 'ES' : 'EN'}
+                </h2>
+                <h2 className="login" onClick={() => navigate('/login')}>{t('nav.login')}</h2>
+                <h2 className="sign-up" onClick={() => navigate('/sign-up')}>{t('nav.signup')}</h2>
             </div>
         </div>
     );

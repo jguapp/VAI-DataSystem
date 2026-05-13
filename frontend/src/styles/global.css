@@ -44,22 +44,13 @@ body {
     cursor: pointer;
   }
 
-.lang-toggle {
-    background: none;
-    border: 2px solid #36C0FC;
-    color: #36C0FC;
-    border-radius: 6px;
-    padding: 2px 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
+.lang-switch {
     cursor: pointer;
-    align-self: center;
-    transition: background-color 0.2s, color 0.2s;
+    color: #36C0FC;
   }
 
-  .lang-toggle:hover {
-    background-color: #36C0FC;
-    color: white;
+  .lang-switch:hover {
+    color: #FF6C03;
   }
 
 /* Home Page */

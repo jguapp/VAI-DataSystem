@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SurveyQuestion from '../components/SurveyQuestion';
-import Logo from '../components/Logo';
+import Navbar from '../components/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/survey.css';
 import API from '../utils/apiClient';
@@ -59,7 +59,7 @@ export default function SurveyPage() {
 
   return (
     <>
-      <Logo />
+      <Navbar />
       <div className="survey-page">
         <h2>{t(`survey.installations.${installationId}`)}</h2>
         <img
