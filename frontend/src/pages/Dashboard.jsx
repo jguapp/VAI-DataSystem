@@ -53,19 +53,23 @@ export default function Dashboard() {
   const { isAuthenticated, surveyData } = useAuth();
 
   const [loadingCharts, setLoadingCharts] = useState(true);
-  
+  const [installationFilter, setInstallationFilter] = useState("all");
+
   const chartRefs = useRef({});
   const charts = useRef({});
-  const [chartType, setChartType] = useState("pie"); 
+  const [chartType, setChartType] = useState("pie");
+
+  const filteredData = installationFilter === "all"
+    ? surveyData
+    : surveyData.filter(entry => entry.installationId === installationFilter);
 
   useEffect(() => {
     setLoadingCharts(true);
 
-    // in the case where there is no survey data
-    if (!Array.isArray(surveyData) || surveyData.length === 0) {
+    if (!Array.isArray(filteredData) || filteredData.length === 0) {
       setLoadingCharts(false);
-    return;
-  }
+      return;
+    }
 
     surveyQuestions.forEach(({ questionId }) => {
       const canvas = chartRefs.current[questionId];
@@ -74,7 +78,7 @@ export default function Dashboard() {
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      const data = aggregateResponses(surveyData, questionId);
+      const data = aggregateResponses(filteredData, questionId);
 
       // Destroy existing chart instance
       if (charts.current[questionId]) {
@@ -118,7 +122,7 @@ export default function Dashboard() {
       });
     });
     setLoadingCharts(false);
-  }, [surveyData, chartType]);
+  }, [filteredData, chartType]);
 
   if (!isAuthenticated) {
     return (
@@ -145,11 +149,26 @@ export default function Dashboard() {
           <option value="doughnut">Doughnut</option>
           <option value="bar">Bar</option>
         </select>
+
+        <label htmlFor="installationFilter">Installation:</label>
+        <select
+          id="installationFilter"
+          value={installationFilter}
+          onChange={(e) => setInstallationFilter(e.target.value)}
+        >
+          <option value="all">All Installations ({surveyData.length} responses)</option>
+          <option value="common-ground">Common Ground</option>
+          <option value="breathing-pavilion">Breathing Pavilion</option>
+        </select>
       </div>
 
       {loadingCharts ? (
         <div className="loading-screen">
           <div className="spinner"></div>
+        </div>
+      ) : filteredData.length === 0 ? (
+        <div className="dashboard-container">
+          <p>No survey responses yet{installationFilter !== 'all' ? ' for this installation' : ''}.</p>
         </div>
       ) : (
         <div className="charts-container">

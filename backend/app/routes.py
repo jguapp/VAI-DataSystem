@@ -1,5 +1,6 @@
 # Define all your Flask routes (API endpoints)
 from flask import Blueprint, request, jsonify, send_file, current_app
+from functools import wraps
 
 from firebase_admin import auth, firestore
 import io
@@ -12,6 +13,19 @@ from app.models import UserSignUp, SurveyResponse
 from app.utils import SurveyAnalyzer, load_responses_from_firestore, save_graphs_to_pdf, clean_firestore_responses
 
 main = Blueprint('main', __name__)
+
+def require_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.headers.get('Authorization', '').replace('Bearer ', '')
+        if not token:
+            return jsonify({"error": "Missing authorization token"}), 401
+        try:
+            auth.verify_id_token(token)
+        except Exception:
+            return jsonify({"error": "Invalid or expired token"}), 401
+        return f(*args, **kwargs)
+    return decorated
 
 question_map = {
     "q1": "Before this installation, how often did you visit this site?",
@@ -55,7 +69,6 @@ def submit_survey():
     print("Received survey submission response_data:", response_data)
 
     installation_id = response_data.get('installationId')
-    responses = response_data.get('responses')
 
     survey_response = SurveyResponse(responses, installation_id)
     
@@ -111,6 +124,7 @@ def verify_token():
         return jsonify({"error": str(e)}), 401
 
 @main.route('/get-survey-responses', methods=['GET'])
+@require_auth
 def get_survey_responses():
     try:
         # Access Firestore from current_app
@@ -129,6 +143,7 @@ def get_survey_responses():
         return jsonify({"error": str(e)}), 500
     
 @main.route('/generate-report', methods=['GET'])
+@require_auth
 def generate_report():
     try:
         raw_responses = load_responses_from_firestore()

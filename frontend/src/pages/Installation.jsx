@@ -15,13 +15,13 @@ export default function Installation() {
                 <div className='installation-1'>
                     <img src='/Breathing_Pavilion.jpeg' alt="Installation 1" className='installation-img'/>
                     <p>Breathing Pavilion</p>
-                    <button className='blue-button' onClick={()=> navigate('/survey')}>Select</button>
+                    <button className='blue-button' onClick={()=> navigate('/survey/breathing-pavilion')}>Select</button>
                 </div>
 
                 <div className='installation-2'>
                     <img src='/Common_Ground.jpeg' alt="Installation 2" className='installation-img'/>
                     <p>Common Ground</p>
-                    <button className='blue-button' onClick={()=> navigate('/survey')}>Select</button>
+                    <button className='blue-button' onClick={()=> navigate('/survey/common-ground')}>Select</button>
                 </div>
             </div>
         </>

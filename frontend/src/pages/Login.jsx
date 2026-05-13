@@ -4,16 +4,12 @@ import Logo from '../components/Logo';
 import '../styles/auth.css';
 import API from '../utils/apiClient';
 import { useAuth } from '../utils/AuthContext'; 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import firebaseConfig from "../utils/firebaseConfig"; 
-import { initializeApp } from "firebase/app";
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 
 export default function Login( ) {
-    const { setIsAuthenticated, setUser, setSurveyData } = useAuth();
+    const { setIsAuthenticated, setUser, startRealtimeListener } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -41,12 +37,8 @@ export default function Login( ) {
     
           setUser({ email: userCred.user.email, uid: userCred.user.uid });
           setIsAuthenticated(true);
-    
-          // fetch survey data after login
-          const surveyRes = await API.get('/get-survey-responses');
-          setSurveyData(surveyRes.data);
-          localStorage.setItem("surveyData", JSON.stringify(surveyRes.data));
-    
+          startRealtimeListener();
+
           navigate("/dashboard");
         } catch (err) {
           console.error("Token verification failed", err);

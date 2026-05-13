@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Installation from './pages/Installation';
@@ -8,36 +8,46 @@ import Login from './pages/Login';
 import Signup from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import './styles/global.css';
-import API from './utils/apiClient';
 import { AuthContext } from './utils/AuthContext';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from './utils/firebase';
 
 function App() {
   const [user, setUser] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [surveyData, setSurveyData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const unsubscribeRef = useRef(null);
 
-  // whenever a user logs into the application, we want to authenticate then and store all the necessaey info (survey data, token, user info)
+  const startRealtimeListener = () => {
+    if (unsubscribeRef.current) return;
+    unsubscribeRef.current = onSnapshot(
+      collection(db, 'surveyResponses'),
+      (snapshot) => {
+        const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setSurveyData(docs);
+      }
+    );
+  };
+
+  const stopRealtimeListener = () => {
+    if (unsubscribeRef.current) {
+      unsubscribeRef.current();
+      unsubscribeRef.current = null;
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
-    if (token) {
-      API.get("/get-survey-responses")
-        .then(res => {
-          setSurveyData(res.data);
-          setIsAuthenticated(true);
-          const storedUser = JSON.parse(localStorage.getItem("user"));
-          if (storedUser) setUser(storedUser);
-        })
-        .catch(err => {
-          console.error("Session check failed:", err);
-          localStorage.removeItem("jwtToken");
-          localStorage.removeItem("user");
-          setIsAuthenticated(false);
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (token && storedUser) {
+      setUser(storedUser);
+      setIsAuthenticated(true);
+      startRealtimeListener();
     }
+    setLoading(false);
+
+    return () => stopRealtimeListener();
   }, []);
 
   if (loading) {
@@ -55,13 +65,15 @@ function App() {
       isAuthenticated,
       setIsAuthenticated,
       surveyData,
-      setSurveyData
+      setSurveyData,
+      startRealtimeListener,
+      stopRealtimeListener
     }}>
       <Router>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/installation-selection' element={<Installation />} />
-          <Route path='/survey' element={<Survey />} />
+          <Route path='/survey/:installationId' element={<Survey />} />
           <Route path='/survey-complete' element={<ThankYou />} />
           <Route path='/login' element={<Login />} />
           <Route path='/sign-up' element={<Signup />} />

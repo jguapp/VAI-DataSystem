@@ -7,7 +7,7 @@ from flask_cors import CORS
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    CORS(app, origins=app.config['FRONTEND_URL'])
+    CORS(app, origins=[app.config['FRONTEND_URL'], "http://localhost:5174", "http://localhost:5175"])
     
     
     # Firebase setup

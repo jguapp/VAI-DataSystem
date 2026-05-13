@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import SurveyQuestion from '../components/SurveyQuestion';
 import Logo from '../components/Logo';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/survey.css';
 import API from '../utils/apiClient';
 import surveyQuestions from '../data/surveyQuestions';
 
 export default function SurveyPage() {
-  const [installationId] = useState('1');
+  const { installationId } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [error, setError] = useState('');
@@ -62,9 +62,12 @@ export default function SurveyPage() {
     <>
       <Logo />
       <div className="survey-page">
-        {/* this is a placeholder */}
-        <h2>Common Ground</h2>
-        <img src="/Common_Ground.jpeg" alt="Installation 1" className="survey-img" />
+        <h2>{installationId === 'common-ground' ? 'Common Ground' : 'Breathing Pavilion'}</h2>
+        <img
+          src={installationId === 'common-ground' ? '/Common_Ground.jpeg' : '/Breathing_Pavilion.jpeg'}
+          alt={installationId}
+          className="survey-img"
+        />
         <br></br>
 
         <div className="progress-container">
