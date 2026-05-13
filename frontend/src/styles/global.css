@@ -24,15 +24,13 @@ body {
 }
 
 .logo-img-1 {
-    max-width: 5%;
+    height: 1.4rem;
+    width: auto;
 }
 .logo-img-2 {
-    margin-top: 0.5%;
-    max-width: 6.5%;
-}
-.logo-img-3 {
-    margin-top: 3%;
-    max-width: 12.5%;
+    margin-top: 2px;
+    height: 1.8rem;
+    width: auto;
 }
 
 /* Navbar */
@@ -157,8 +155,8 @@ body {
 
 /* ── Mobile ─────────────────────────────────────────── */
 @media (max-width: 600px) {
-    .logo-img-1 { max-width: 12%; }
-    .logo-img-2 { max-width: 16%; }
+    .logo-img-1 { height: 1.1rem; }
+    .logo-img-2 { height: 1.4rem; }
     .logo-img-3 { max-width: 30%; }
 
     .login-sign-up {
