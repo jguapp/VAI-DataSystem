@@ -10,7 +10,9 @@ body {
 /* Logo */
 .login-sign-up {
     display: flex;
-    gap: 1.5rem; 
+    gap: 1.5rem;
+    align-items: center;
+    white-space: nowrap;
 }
 
 .logo {
