@@ -27,6 +27,11 @@ function App() {
       (snapshot) => {
         const docs = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setSurveyData(docs);
+      },
+      (error) => {
+        console.error('Firestore listener error:', error);
+        // Reset so the listener can be restarted on next auth state change
+        unsubscribeRef.current = null;
       }
     );
   };
