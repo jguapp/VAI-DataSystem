@@ -15,8 +15,10 @@
     "chart.js": "^4.4.9",
     "chartjs-plugin-datalabels": "^2.2.0",
     "firebase": "^11.6.1",
+    "i18next": "^26.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-i18next": "^17.0.7",
     "react-router-dom": "^7.4.1"
   },
   "devDependencies": {

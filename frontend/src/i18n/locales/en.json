@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "dashboard": "Dashboard"
+  },
+  "home": {
+    "title": "Public Art Data Application System",
+    "description": "Empowering communities to measure and shape the impact of public art. Discover how our data collection platform helps drive informed, community-focused urban design.",
+    "button": "Get Started",
+    "footerLink": "Visit Van Alen Institute's Site"
+  },
+  "installation": {
+    "heading": "Which Installation Did You View?",
+    "select": "Select",
+    "bp": "Breathing Pavilion",
+    "cg": "Common Ground"
+  },
+  "survey": {
+    "progress": "Question {{current}} of {{total}}",
+    "error": "Please answer the question before proceeding.",
+    "submissionError": "Survey submission failed.",
+    "installations": {
+      "common-ground": "Common Ground",
+      "breathing-pavilion": "Breathing Pavilion"
+    }
+  },
+  "surveyNav": {
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit"
+  },
+  "thankYou": {
+    "heading": "Thank You for Your Submission!",
+    "text": "We appreciate you taking the time to complete this survey.",
+    "button": "Home"
+  },
+  "questions": {
+    "q1": {
+      "question": "Before this installation, how often did you visit this site?",
+      "options": ["Daily", "A few times a week", "Once a week", "A few times a month", "Rarely/Never"]
+    },
+    "q2": {
+      "question": "Since the installation, how often do you visit this site?",
+      "options": ["Daily", "A few times a week", "Once a week", "A few times a month", "Rarely/Never"]
+    },
+    "q3": {
+      "question": "On average, how much time do you spend at this site per visit?",
+      "options": ["Less than 5 minutes", "5-15 minutes", "15-30 minutes", "30 minutes to 1 hour", "More than 1 hour"]
+    },
+    "q4": {
+      "question": "What is your age group?",
+      "options": ["Under 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
+    },
+    "q5": {
+      "question": "What is your gender?",
+      "options": ["Male", "Female", "Non-binary", "Prefer not to say"]
+    },
+    "q6": {
+      "question": "What is your race/ethnicity?",
+      "options": [
+        "Black or African American", "Hispanic or Latino/a/x", "White", "Asian",
+        "Native American or Alaska Native", "Native Hawaiian or Other Pacific Islander",
+        "Middle Eastern or North African", "Multiracial", "Prefer not to say", "Other"
+      ]
+    },
+    "q7": {
+      "question": "What is your zip code?",
+      "options": ["10032", "10033", "10040", "Other"]
+    },
+    "q8": {
+      "question": "How welcome do you feel on this site? (1 = Not Welcome, 5 = Very Welcome)"
+    },
+    "q9": {
+      "question": "How safe do you feel on this site? (1 = Not Safe, 5 = Very Safe)"
+    },
+    "q10": {
+      "question": "How comfortable do you feel on this site? (1 = Not Comfortable, 5 = Very Comfortable)"
+    },
+    "q11": {
+      "question": "How positive is your overall experience at this site? (1 = Very Negative, 5 = Very Positive)"
+    },
+    "q12": {
+      "question": "What activity best describes your time spent at this site?",
+      "options": [
+        "Read materials on-site", "Played or engaged with the installation",
+        "Took a phone call", "Ate or drank", "Socialized with others",
+        "Passed through without stopping", "Other"
+      ]
+    },
+    "q13": {
+      "question": "Has this installation made you more interested in exploring the surrounding neighborhood?",
+      "options": ["Yes", "No", "Not Sure"]
+    }
+  }
+}

@@ -1,18 +1,22 @@
-export default function SurveyQuestion({ 
-    question, 
-    options, 
-    multiple, 
-    currentAnswer, 
-    questionType = "choice",
-    onAnswer, 
-    onNext, 
-    onBack, 
+import { useTranslation } from 'react-i18next';
+
+export default function SurveyQuestion({
+    question,
+    options,
+    multiple,
+    currentAnswer,
+    questionType = 'choice',
+    onAnswer,
+    onNext,
+    onBack,
     isFirst,
     isLast,
     handleSubmit
 }) {
+    const { t } = useTranslation();
+
     const handleChange = (e, option) => {
-        if (questionType === "range") {
+        if (questionType === 'range') {
             onAnswer([e.target.value]);
         } else if (multiple) {
             const updated = currentAnswer.includes(option)
@@ -30,7 +34,7 @@ export default function SurveyQuestion({
         <div className="question-container">
             <h2>{question}</h2>
             <form>
-                {questionType === "range" ? (
+                {questionType === 'range' ? (
                     <div className="range-input-wrapper">
                         <input
                             type="range"
@@ -50,10 +54,10 @@ export default function SurveyQuestion({
                         </div>
                     </div>
                 ) : (
-                    options.map((option, index) => (
+                    (Array.isArray(options) ? options : []).map((option, index) => (
                         <label key={index} className="option-label">
                             <input
-                                type={multiple ? "checkbox" : "radio"}
+                                type={multiple ? 'checkbox' : 'radio'}
                                 name="option"
                                 value={option}
                                 checked={currentAnswer?.includes(option) || false}
@@ -67,25 +71,23 @@ export default function SurveyQuestion({
             <div className="survey-navigation">
                 {!isFirst && (
                     <button type="button" className="nav-button back-button" onClick={onBack}>
-                        Back
+                        {t('surveyNav.back')}
                     </button>
                 )}
                 {isLast && (
                     <button type="button" className="nav-button submit-button" onClick={handleSubmit}>
-                        Submit
+                        {t('surveyNav.submit')}
                     </button>
                 )}
-                <button 
-                    type="button" 
-                    className="nav-button next-button" 
-                    onClick={onNext} 
+                <button
+                    type="button"
+                    className="nav-button next-button"
+                    onClick={onNext}
                     disabled={isNextDisabled}
                 >
-                    Next
+                    {t('surveyNav.next')}
                 </button>
             </div>
         </div>
     );
 }
-
-

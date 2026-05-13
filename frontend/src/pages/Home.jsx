@@ -1,29 +1,27 @@
-import '../styles/global.css'
-import { useNavigate } from "react-router-dom";
+import '../styles/global.css';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
     const navigate = useNavigate();
-    
+    const { t } = useTranslation();
+
     return (
         <>
-        <Navbar/>
+        <Navbar />
         <div className="home-container">
-            <h1>Public Art Data Application System</h1>
-            <p className='home-text'>Empowering communities to measure and shape the impact of public art. <br/>
-            Discover how our data collection platform helps drive informed, 
-            community-focused urban design.</p>
-            <button className='blue-button' onClick={()=> navigate('/installation-selection')}>Get Started</button>
-
+            <h1>{t('home.title')}</h1>
+            <p className='home-text'>{t('home.description')}</p>
+            <button className='blue-button' onClick={() => navigate('/installation-selection')}>
+                {t('home.button')}
+            </button>
             <footer className="home-footer">
                 <a href="https://www.vanalen.org/" target="_blank" rel="noopener noreferrer">
-                    Visit Van Alen Institute’s Site
+                    {t('home.footerLink')}
                 </a>
             </footer>
-
         </div>
-    </>
+        </>
     );
-    
-
 }

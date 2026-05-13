@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "logout": "Cerrar sesión",
+    "dashboard": "Panel"
+  },
+  "home": {
+    "title": "Sistema de Datos de Arte Público",
+    "description": "Empoderando a las comunidades para medir y moldear el impacto del arte público. Descubra cómo nuestra plataforma de recolección de datos impulsa un diseño urbano informado y centrado en la comunidad.",
+    "button": "Comenzar",
+    "footerLink": "Visitar el sitio del Instituto Van Alen"
+  },
+  "installation": {
+    "heading": "¿Qué instalación visitó?",
+    "select": "Seleccionar",
+    "bp": "Pabellón de Respiración",
+    "cg": "Terreno Común"
+  },
+  "survey": {
+    "progress": "Pregunta {{current}} de {{total}}",
+    "error": "Por favor responda la pregunta antes de continuar.",
+    "submissionError": "Error al enviar la encuesta.",
+    "installations": {
+      "common-ground": "Terreno Común",
+      "breathing-pavilion": "Pabellón de Respiración"
+    }
+  },
+  "surveyNav": {
+    "back": "Atrás",
+    "next": "Siguiente",
+    "submit": "Enviar"
+  },
+  "thankYou": {
+    "heading": "¡Gracias por su respuesta!",
+    "text": "Agradecemos que haya tomado el tiempo para completar esta encuesta.",
+    "button": "Inicio"
+  },
+  "questions": {
+    "q1": {
+      "question": "Antes de esta instalación, ¿con qué frecuencia visitaba este lugar?",
+      "options": ["Diariamente", "Varias veces a la semana", "Una vez a la semana", "Varias veces al mes", "Raramente/Nunca"]
+    },
+    "q2": {
+      "question": "Desde la instalación, ¿con qué frecuencia visita este lugar?",
+      "options": ["Diariamente", "Varias veces a la semana", "Una vez a la semana", "Varias veces al mes", "Raramente/Nunca"]
+    },
+    "q3": {
+      "question": "En promedio, ¿cuánto tiempo pasa en este lugar por visita?",
+      "options": ["Menos de 5 minutos", "5-15 minutos", "15-30 minutos", "30 minutos a 1 hora", "Más de 1 hora"]
+    },
+    "q4": {
+      "question": "¿Cuál es su grupo de edad?",
+      "options": ["Menor de 18", "18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
+    },
+    "q5": {
+      "question": "¿Cuál es su género?",
+      "options": ["Masculino", "Femenino", "No binario", "Prefiero no decir"]
+    },
+    "q6": {
+      "question": "¿Cuál es su raza/etnia?",
+      "options": [
+        "Negro o Afroamericano", "Hispano o Latino/a/x", "Blanco", "Asiático",
+        "Nativo Americano o Nativo de Alaska", "Nativo de Hawái u Otro Isleño del Pacífico",
+        "Árabe o del Norte de África", "Multirracial", "Prefiero no decir", "Otro"
+      ]
+    },
+    "q7": {
+      "question": "¿Cuál es su código postal?",
+      "options": ["10032", "10033", "10040", "Otro"]
+    },
+    "q8": {
+      "question": "¿Qué tan bienvenido/a se siente en este lugar? (1 = Nada bienvenido, 5 = Muy bienvenido)"
+    },
+    "q9": {
+      "question": "¿Qué tan seguro/a se siente en este lugar? (1 = Nada seguro, 5 = Muy seguro)"
+    },
+    "q10": {
+      "question": "¿Qué tan cómodo/a se siente en este lugar? (1 = Nada cómodo, 5 = Muy cómodo)"
+    },
+    "q11": {
+      "question": "¿Qué tan positiva es su experiencia general en este lugar? (1 = Muy negativa, 5 = Muy positiva)"
+    },
+    "q12": {
+      "question": "¿Qué actividad describe mejor su tiempo en este lugar?",
+      "options": [
+        "Leí materiales en el lugar", "Jugué o interactué con la instalación",
+        "Atendí una llamada telefónica", "Comí o bebí", "Socialicé con otros",
+        "Pasé sin detenerme", "Otro"
+      ]
+    },
+    "q13": {
+      "question": "¿Esta instalación le ha generado más interés en explorar el vecindario?",
+      "options": ["Sí", "No", "No estoy seguro/a"]
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/survey.css';
 import API from '../utils/apiClient';
 import surveyQuestions from '../data/surveyQuestions';
+import { useTranslation } from 'react-i18next';
 
 export default function SurveyPage() {
   const { installationId } = useParams();
@@ -12,20 +13,23 @@ export default function SurveyPage() {
   const [answers, setAnswers] = useState({});
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const current = surveyQuestions[currentIndex];
   const questionKey = current.questionId;
 
+  const translatedQuestion = t(`questions.${questionKey}.question`);
+  const translatedOptions = current.type === 'range'
+    ? current.options
+    : t(`questions.${questionKey}.options`, { returnObjects: true });
+
   const handleAnswerChange = (key, answer) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [key]: answer,
-    }));
+    setAnswers((prev) => ({ ...prev, [key]: answer }));
   };
 
   const handleNext = () => {
     if (!answers[questionKey] || answers[questionKey].length === 0) {
-      setError("Please answer the question before proceeding.");
+      setError(t('survey.error'));
       return;
     }
     setError('');
@@ -46,15 +50,10 @@ export default function SurveyPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await API.post('/submit-survey', {
-        installationId,
-        responses: answers,
-      });
-      console.log('Survey is submitted', res.data);
+      await API.post('/submit-survey', { installationId, responses: answers });
       navigate('/survey-complete');
     } catch (err) {
-      setError(err.response?.data?.message || 'Survey submission failed.');
-      console.error('Submission failure:', err);
+      setError(err.response?.data?.message || t('survey.submissionError'));
     }
   };
 
@@ -62,33 +61,31 @@ export default function SurveyPage() {
     <>
       <Logo />
       <div className="survey-page">
-        <h2>{installationId === 'common-ground' ? 'Common Ground' : 'Breathing Pavilion'}</h2>
+        <h2>{t(`survey.installations.${installationId}`)}</h2>
         <img
           src={installationId === 'common-ground' ? '/Common_Ground.jpeg' : '/Breathing_Pavilion.jpeg'}
           alt={installationId}
           className="survey-img"
         />
-        <br></br>
+        <br />
 
         <div className="progress-container">
           <div className="progress-text">
-            Question {currentIndex + 1} of {surveyQuestions.length}
+            {t('survey.progress', { current: currentIndex + 1, total: surveyQuestions.length })}
           </div>
           <div className="progress-bar">
             <div
               className="progress-bar-fill"
-              style={{
-                width: `${((currentIndex + 1) / surveyQuestions.length) * 100}%`
-              }}
+              style={{ width: `${((currentIndex + 1) / surveyQuestions.length) * 100}%` }}
             />
           </div>
         </div>
 
         <SurveyQuestion
-          question={current.question}
-          options={current.options}
+          question={translatedQuestion}
+          options={translatedOptions}
           multiple={current.multiple}
-          questionType={current.type || "choice"}
+          questionType={current.type || 'choice'}
           currentAnswer={answers[questionKey] || []}
           onAnswer={(answer) => handleAnswerChange(questionKey, answer)}
           onNext={handleNext}
@@ -103,4 +100,3 @@ export default function SurveyPage() {
     </>
   );
 }
-
