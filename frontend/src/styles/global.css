@@ -5,7 +5,7 @@
 
 body {
     padding: 2%;
-  }
+}
 
 /* Logo */
 .login-sign-up {
@@ -23,7 +23,7 @@ body {
     cursor: pointer;
 }
 
-.logo-img-1{
+.logo-img-1 {
     max-width: 5%;
 }
 .logo-img-2 {
@@ -39,26 +39,27 @@ body {
 .navbar-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .login:hover, .sign-up:hover, .dashboard:hover {
     color: #FF6C03;
     cursor: pointer;
-  }
+}
 
 .lang-switch {
     cursor: pointer;
     color: #36C0FC;
-  }
+}
 
-  .lang-switch:hover {
+.lang-switch:hover {
     color: #FF6C03;
-  }
+}
 
 /* Home Page */
 .home-container {
     text-align: center;
-    height: 70vh;
+    min-height: 70vh;
     margin-top: 10%;
 }
 
@@ -83,18 +84,21 @@ body {
 }
 
 /* Installation Page */
-.installation-container{
+.installation-container {
     margin-top: 5%;
     text-align: center;
     display: flex;
     justify-content: space-evenly;
     padding-bottom: 5%;
-
+    flex-wrap: wrap;
+    gap: 2rem;
 }
+
 .installation-img {
     width: 75%;
-    height: 75%;
+    height: auto;
 }
+
 .installation-h2 {
     text-align: center;
     margin-top: 5%;
@@ -102,25 +106,25 @@ body {
 
 /* Button CSS */
 .blue-button, .thank-you-button {
-    background-color: #36C0FC;  
-    color: black;              
-    padding: 10px 20px; 
-    border: none;              
-    border-radius: 10px;        
-    font-size: 16px;           
-    cursor: pointer;            
-    transition: background-color 0.3s;  
+    background-color: #36C0FC;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin-top: 3%;
-  }
-  
+}
+
 .blue-button:hover, .thank-you-button:hover {
-    background-color: #27AE60;  
-  }
-  
+    background-color: #27AE60;
+}
+
 .blue-button:active, .thank-you-button:hover {
-    background-color: #27AE60;  
-    transform: translateY(1px); 
-  }
+    background-color: #27AE60;
+    transform: translateY(1px);
+}
 
 /* Thank you page */
 .thank-you-container {
@@ -128,26 +132,57 @@ body {
     margin-top: 5%;
 }
 
-/* loading  */
+/* loading */
 .loading-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: white;
-  }
-  
-  .spinner {
+}
+
+.spinner {
     width: 50px;
     height: 50px;
     border: 6px solid #f3f3f3;
     border-top: 6px solid #3498db;
     border-radius: 50%;
     animation: spin 0.9s linear infinite;
-  }
-  
-  @keyframes spin {
+}
+
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
-  
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .logo-img-1 { max-width: 12%; }
+    .logo-img-2 { max-width: 16%; }
+    .logo-img-3 { max-width: 30%; }
+
+    .login-sign-up {
+        gap: 0.75rem;
+    }
+
+    .login-sign-up h2 {
+        font-size: 1rem;
+    }
+
+    .installation-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .installation-img {
+        width: 90%;
+    }
+
+    .home-container {
+        margin-top: 20%;
+    }
+
+    .home-footer {
+        margin-top: 30%;
+    }
+}

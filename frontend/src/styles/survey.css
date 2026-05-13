@@ -22,6 +22,7 @@
 
 .survey-img {
     width: 25%;
+    height: auto;
 }
 
 .progress-container {
@@ -57,39 +58,39 @@
 }
 
 .next-button {
-    background-color: #FF6C03;  
-    color: black;              
-    padding: 10px 20px; /* Top/bottom and left/right padding */
-    border: none;              
-    border-radius: 10px;        
-    font-size: 16px;           
-    cursor: pointer;            
-    transition: background-color 0.3s;  
+    background-color: #FF6C03;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin-top: 3%;
     margin-left: 2%;
 }
 
 .back-button {
-    background-color: #36C0FC;  
-    color: black;              
-    padding: 10px 20px; /* Top/bottom and left/right padding */
-    border: none;              
-    border-radius: 10px;        
-    font-size: 16px;           
-    cursor: pointer;            
-    transition: background-color 0.3s;  
+    background-color: #36C0FC;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin-top: 3%;
 }
 
 .submit-button {
-    background-color: #27AE60;  
-    color: black;              
-    padding: 10px 20px; /* Top/bottom and left/right padding */
-    border: none;              
-    border-radius: 10px;        
-    font-size: 16px;           
-    cursor: pointer;            
-    transition: background-color 0.3s;  
+    background-color: #27AE60;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin-top: 3%;
     float: right;
 }
@@ -99,8 +100,7 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Range slider css */
-/* Range input wrapper */
+/* Range slider */
 .range-input-wrapper {
     display: flex;
     flex-direction: column;
@@ -108,7 +108,6 @@
     margin-top: 20px;
 }
 
-/* Range input */
 .range-input-wrapper input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
@@ -119,7 +118,6 @@
     outline: none;
 }
 
-/* Range input thumb (slider) */
 .range-input-wrapper input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -138,16 +136,6 @@
     cursor: pointer;
 }
 
-/* Change the slider's thumb color when hovered */
-.range-input-wrapper input[type="range"]:hover::-webkit-slider-thumb {
-    background: #ff77c9;
-}
-
-.range-input-wrapper input[type="range"]:hover::-moz-range-thumb {
-    background: #ff77c9;
-}
-
-/* Labels under the range */
 .range-labels {
     display: flex;
     justify-content: space-between;
@@ -162,3 +150,26 @@
     text-align: center;
 }
 
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .survey-img {
+        width: 70%;
+    }
+
+    .option-label {
+        font-size: 16px;
+    }
+
+    .survey-navigation {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .next-button, .back-button, .submit-button {
+        flex: 1;
+        margin-left: 0;
+        float: none;
+        text-align: center;
+    }
+}

@@ -1,20 +1,20 @@
 .dashboard-container {
-    background-color:  #D9D9D9;
-    height: 50vh;
+    background-color: #D9D9D9;
+    min-height: 50vh;
     margin-top: 5%;
     padding: 2%;
 }
 
 .filter-button {
     float: right;
-    background-color: #FF77C9;  
-    color: black;              
-    padding: 10px 20px; 
-    border: none;              
-    border-radius: 10px;        
-    font-size: 16px;           
-    cursor: pointer;            
-    transition: background-color 0.3s;  
+    background-color: #FF77C9;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .charts-container {
@@ -23,61 +23,73 @@
     gap: 2rem;
     padding: 1rem;
     justify-content: center;
-  }
+}
 
-  .dashboard-controls {
-    margin: 5rem 10rem;
+.dashboard-controls {
+    margin: 2rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.75rem;
     align-items: center;
     font-size: 1.2em;
-  }
+}
 
-  #chart-type {
+#chart-type {
     font-size: 0.9em;
-  }
+}
 
-  .chart-block {
+.chart-block {
     border: 1px solid #ccc;
     border-radius: 12px;
-    padding: 5rem;
+    padding: 2rem;
     margin: 1rem;
     background: white;
     width: 450px;
+    max-width: 100%;
     height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  
-  .chart-block canvas {
+}
+
+.chart-block canvas {
     height: 100% !important;
     width: 100% !important;
-  }
-  
-  
-  .loading-screen {
+}
+
+.loading-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
     font-size: 1.5rem;
     color: #333;
-  }
-  
-  .spinner {
+}
+
+.spinner {
     width: 40px;
     height: 40px;
     border: 6px solid #ccc;
     border-top: 6px solid #3498db;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
-  }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Mobile ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .dashboard-controls {
+        margin: 1rem;
+        font-size: 1em;
     }
-  }
-  
+
+    .chart-block {
+        width: 100%;
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+}

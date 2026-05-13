@@ -52,6 +52,13 @@
     margin-bottom: 10px;
     border-radius: 5px;
   }
+
+  .success-message {
+    color: green;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
   
   .password-wrapper {
     position: relative;
