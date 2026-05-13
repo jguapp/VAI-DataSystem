@@ -20,9 +20,7 @@ const aggregateResponses = (data, questionId) => {
     const response = responses[questionId];
     if (response) {
       const values = Array.isArray(response) ? response : [response];
-      values.forEach(val => {
-        counts[val] = (counts[val] || 0) + 1;
-      });
+      values.forEach(val => { counts[val] = (counts[val] || 0) + 1; });
     }
   });
   return counts;
@@ -112,15 +110,14 @@ export default function Dashboard() {
                 return `${((value / total) * 100).toFixed(1)}%`;
               },
               color: "#000",
-              font: { weight: "bold", size: 13 }
+              font: { weight: "bold", size: 12 }
             },
-            legend: { position: "bottom" }
+            legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } }
           }
         }
       });
     });
 
-    // Scale questions: always a bar chart showing distribution 1–5
     scaleQuestions.forEach(({ questionId }) => {
       const canvas = chartRefs.current[questionId];
       if (!canvas) return;
@@ -161,10 +158,9 @@ export default function Dashboard() {
   }, [filteredData, chartType]);
 
   return (
-    <>
+    <div className="dashboard-page">
       <Navbar />
 
-      {/* Summary stats */}
       <div className="stats-bar">
         <div className="stat-card">
           <span className="stat-number">{surveyData.length}</span>
@@ -190,7 +186,7 @@ export default function Dashboard() {
 
         <label htmlFor="installationFilter">Installation:</label>
         <select id="installationFilter" value={installationFilter} onChange={(e) => setInstallationFilter(e.target.value)}>
-          <option value="all">All Installations ({surveyData.length} responses)</option>
+          <option value="all">All ({surveyData.length} responses)</option>
           <option value="common-ground">Common Ground ({cgCount})</option>
           <option value="breathing-pavilion">Breathing Pavilion ({bpCount})</option>
         </select>
@@ -199,29 +195,34 @@ export default function Dashboard() {
       {loadingCharts ? (
         <div className="loading-screen"><div className="spinner"></div></div>
       ) : filteredData.length === 0 ? (
-        <div className="dashboard-container">
-          <p>No survey responses yet{installationFilter !== 'all' ? ' for this installation' : ''}.</p>
+        <div className="dashboard-empty">
+          No survey responses yet{installationFilter !== 'all' ? ' for this installation' : ''}.
         </div>
       ) : (
         <>
+          <p className="section-heading">Survey Responses</p>
           <div className="charts-container">
             {choiceQuestions.map(({ questionId, question }) => (
               <div key={questionId} className="chart-block">
                 <h3>{question}</h3>
-                <canvas ref={(el) => (chartRefs.current[questionId] = el)} />
+                <div className="chart-canvas-wrapper">
+                  <canvas ref={(el) => (chartRefs.current[questionId] = el)} />
+                </div>
               </div>
             ))}
           </div>
 
-          <h2 className="scale-section-heading">Experience Ratings (1–5)</h2>
+          <p className="section-heading">Experience Ratings (1–5)</p>
           <div className="charts-container">
             {scaleQuestions.map(({ questionId, question }) => {
               const avg = averageScore(filteredData, questionId);
               return (
                 <div key={questionId} className="chart-block">
                   <h3>{question}</h3>
-                  {avg && <p className="avg-score">Average: <strong>{avg} / 5</strong></p>}
-                  <canvas ref={(el) => (chartRefs.current[questionId] = el)} />
+                  {avg && <p className="avg-score">Avg: {avg} / 5</p>}
+                  <div className="chart-canvas-wrapper">
+                    <canvas ref={(el) => (chartRefs.current[questionId] = el)} />
+                  </div>
                 </div>
               );
             })}
@@ -229,9 +230,9 @@ export default function Dashboard() {
         </>
       )}
 
-      <div style={{ textAlign: 'center', margin: '2rem' }}>
+      <div className="dashboard-footer">
         <button className="blue-button" onClick={handleDownload}>Download Report</button>
       </div>
-    </>
+    </div>
   );
 }
