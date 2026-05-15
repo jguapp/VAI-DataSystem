@@ -1,9 +1,11 @@
 # Van Alen Institute Public Art Impact Measurement System
 
 ## Project Overview
+
 The Van Alen Institute, a nonprofit organization dedicated to inclusive urban design, is launching two community-led public art installations in Spring 2025. To measure the impact of these installations, a data collection application is being developed to facilitate real-time data gathering, survey inputs, and observational logging at installation sites. This system will provide automated data analysis, visualization tools, and reporting capabilities, allowing stakeholders to make data-driven decisions and advocate for further community-focused public art initiatives.
 
 ## Features
+
 - **Real-time Data Collection**: Users can input survey responses and observational logs directly from installation sites.
 - **Automated Data Analysis**: The system processes collected data to generate meaningful insights.
 - **Visualization Tools**: Interactive charts and graphs for a clear representation of engagement metrics.
@@ -11,11 +13,75 @@ The Van Alen Institute, a nonprofit organization dedicated to inclusive urban de
 - **User-Friendly Interface**: Intuitive design for ease of use by community partners and researchers.
 
 ## Tech Stack
+
 - **Frontend**: React
 - **Backend**: Python Flask
 - **Database**: Firestore (NoSQL)
 
-## 📦 VAI DataSystem – Local Setup Instructions
+---
+
+## 🏛️ Van Alen Institute Staff Guide
+
+This section is intended for Van Alen Institute staff who need to deploy, access, or manage the VAI Data System. No coding experience is required.
+
+### 📺 Deployment Tutorial Video
+
+The video below walks through the full process of forking the repository and deploying the website to Vercel from start to finish.
+
+> 📹 **[Watch the Deployment Tutorial](#)** *(replace this link with the final video URL)*
+
+The tutorial covers:
+- Forking the GitHub repository to your own account
+- Importing the project into Vercel
+- Configuring environment variables
+- Deploying and verifying the live site
+
+---
+
+### 🔑 Firebase Access & Ownership Transfer
+
+The VAI Data System uses **Firebase** for its database and authentication. To fully deploy and operate the system, Van Alen will need ownership access to the Firebase project.
+
+**To request access:**
+
+Contact **Joel Vasquez** at [jfvasq1@gmail.com](mailto:jfvasq1@gmail.com) to initiate an ownership transfer of the Firebase project. Once transferred, you will have full access to:
+- The Firestore database (where all survey and observational data is stored)
+- Firebase Authentication (user management)
+- The environment variable credentials needed to complete your Vercel deployment
+
+> ⚠️ **Do not attempt to deploy the application without first obtaining Firebase credentials.** The app will not function without them.
+
+---
+
+### 🌐 Using the Website
+
+Once deployed, the VAI Data System allows staff and community partners to:
+
+- **Log in** using an email and password (set up through Firebase Authentication)
+- **Submit survey responses** and observational data directly from installation sites
+- **View data visualizations** including charts and engagement metrics
+- **Generate reports** for stakeholder review
+
+Access to the system is managed through Firebase Authentication. New users must be added by an administrator with Firebase access.
+
+---
+
+### 📱 QR Code
+
+A QR code linking directly to the deployed website is included in the codebase as `survey_qr.png` in the root of the repository. This can be printed and displayed at installation sites for easy visitor access.
+
+---
+
+### 📬 Support
+
+For any technical issues, deployment questions, or access requests, contact:
+**Joel Vasquez** — [jfvasq1@gmail.com](mailto:jfvasq1@gmail.com)
+
+---
+
+## 💻 Developer Guide
+
+This section is intended for developers who want to run the VAI Data System locally or contribute to the codebase.
 
 ### ✅ Prerequisites
 
@@ -26,9 +92,11 @@ Install the following tools:
   * Recommended via Homebrew: [https://formulae.brew.sh/formula/node](https://formulae.brew.sh/formula/node)
   * Additional guide: [Install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-* **Python 3 (latest)**
+* **Python 3.11**
 
-  * Download: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+  * This project requires **Python 3.11 specifically**.
+  * Download: [https://www.python.org/downloads/release/python-3110/](https://www.python.org/downloads/release/python-3110/)
+  * Verify your version: `python3 --version`
 
 * **Git**
 
@@ -193,4 +261,3 @@ python3 run.py
   source venv/bin/activate
   python3 run.py
   ```
-
