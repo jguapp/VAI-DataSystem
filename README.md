@@ -1,3 +1,5 @@
+
+
 # Van Alen Institute Public Art Impact Measurement System
 
 ## Project Overview
@@ -28,7 +30,7 @@ This section is intended for Van Alen Institute staff who need to deploy, access
 
 The video below walks through the full process of forking the repository and deploying the website to Vercel from start to finish.
 
-> 📹 **[Watch the Deployment Tutorial](#)** *(replace this link with the final video URL)*
+[![Watch the deployment tutorial](https://img.youtube.com/vi/xCMa0MGDjG8/0.jpg)](https://youtu.be/xCMa0MGDjG8)
 
 The tutorial covers:
 - Forking the GitHub repository to your own account
